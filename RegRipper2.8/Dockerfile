@@ -3,7 +3,7 @@ FROM alpine:latest
 # Perl cpanm lines from ytnobody (github.com/ytnobody)
 # this Dockerfile by Bonifield (github.com/bonifield)
 
-ENV RR=/usr/rr
+ENV RR=/usr/share/rr
 
 RUN apk add --update \
 	bash make perl perl-dev wget curl tar zip \
@@ -33,7 +33,7 @@ RUN perl Makefile.PL \
 
 WORKDIR $RR/RegRipper2.8-master
 
-RUN sed -i 's/catfile("plugins")/catfile("\/usr\/rr\/RegRipper2.8-master\/plugins")/g' rip.pl \
+RUN sed -i 's/catfile("plugins")/catfile("\/usr\/share\/rr\/RegRipper2.8-master\/plugins")/g' rip.pl \
 	&& sed -i 's/c:\\perl\\bin\\perl\.exe/\/usr\/bin\/perl/g' rip.pl \
 	&& sed -i 's/c:\\perl\\bin\\perl\.exe/\/usr\/bin\/perl/g' rr.pl \
 	&& chmod +x rip.pl \
@@ -52,7 +52,7 @@ VOLUME /home/rr
 
 USER rr
 
-ENTRYPOINT ["/usr/rr/RegRipper2.8-master/rip.pl"]
+ENTRYPOINT ["/usr/share/rr/RegRipper2.8-master/rip.pl"]
 
 # comment out ENTRYPOINT then uncomment below to make interactive with docker exec
 #COPY sleepy.sh /usr/bin/
