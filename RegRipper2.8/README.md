@@ -19,3 +19,6 @@ docker ps | grep regrip | cut -d ' ' -f 1 | xargs docker stop
 or
 docker stop `docker ps | grep regrip | cut -d ' ' -f 1`
 ```
+
+### TODO and known issues
+- a small number of plugins produce errors in the container, which can be seen with ...regripper -l (lists all the plugins and, conveniently, errors)
