@@ -51,8 +51,11 @@ VOLUME /home/rr
 
 USER rr
 
-ENTRYPOINT ["/usr/share/rr/RegRipper2.8-master/rip.pl"]
+ENTRYPOINT ["/usr/bin/perl", "/usr/share/rr/RegRipper2.8-master/rip.pl"]
 
 # comment out ENTRYPOINT then uncomment below to make interactive with docker exec
 #COPY sleepy.sh /usr/bin/
 #CMD ["/bin/bash", "/usr/bin/sleepy.sh"]
+
+# for manual testing with sleepy running to keep the container alive
+# docker run --rm -v $PWD:/home/rr -d regripper && docker exec -it `docker ps | grep regripper | cut -d ' ' -f 1` /bin/bash && docker stop `docker ps | grep regripper | cut -d ' ' -f 1`
