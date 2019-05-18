@@ -6,14 +6,20 @@
 docker build -t regripper .
 ```
 
-### use RegRipper to parse various Windows registry hives
+### alias the container
 - note:  the path left of the colon is your LOCAL host, the right is inside the container
 ```
-docker run --rm -v `pwd`:/home/rr regripper -r SOFTWARE -p uac
-docker run --rm -v `pwd`:/home/rr regripper -r SAM -p samparse
+alias rip="docker run --rm -v `pwd`:/home/rr regripper"
 ```
 
-### stop the container if running persistent (see comments in Dockerfile)
+### use RegRipper to parse various Windows registry hives
+```
+rip -h
+rip -r SOFTWARE -p uac
+rip -r SAM -p samparse
+```
+
+### stop the container if running persistent with sleepy.sh for testing (see comments in Dockerfile)
 ```
 docker ps | grep regrip | cut -d ' ' -f 1 | xargs docker stop
 or
