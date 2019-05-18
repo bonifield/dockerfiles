@@ -7,10 +7,11 @@ docker build -t regripper .
 ```
 
 ### alias the container
-- note:  the path left of the colon is your LOCAL host, the right is inside the container
+- the path left of the colon is your LOCAL host, the right is inside the container
+- adding the source statement to the alias forces the alias to re-evaluate $PWD
 ```
 # vim/nano ~/.bashrc
-alias rip="docker run --rm -v $PWD:/home/rr regripper"
+alias rip="source ~/.bashrc && docker run --rm -v $PWD:/home/rr regripper"
 # save and exit
 . .bashrc
 ```
