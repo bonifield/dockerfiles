@@ -9,7 +9,10 @@ docker build -t regripper .
 ### alias the container
 - note:  the path left of the colon is your LOCAL host, the right is inside the container
 ```
+# vim/nano ~/.bashrc
 alias rip="docker run --rm -v `pwd`:/home/rr regripper"
+# save and exit
+. .bashrc
 ```
 
 ### use RegRipper to parse various Windows registry hives
