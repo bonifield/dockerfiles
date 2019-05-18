@@ -6,10 +6,9 @@ FROM alpine:latest
 ENV RR=/usr/share/rr
 
 RUN apk add --update \
-	bash make perl perl-dev wget curl tar zip \
+	bash make perl perl-dev wget curl tar zip perl-app-cpanminus \
 	&& rm -rf /var/cache/apk/*
 
-RUN curl -L http://xrl.us/cpanm > /bin/cpanm && chmod +x /bin/cpanm
 RUN cpanm App::cpm
 
 WORKDIR /usr
