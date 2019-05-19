@@ -20,3 +20,9 @@ alias evtxdump="source ~/.bashrc && docker run --rm -v $PWD:/home/ed evtxdump"
 ```
 evtxdump Security.evtx
 ```
+
+### optional - use pretty-xml.py to beautify the output
+```
+evtxdump Security.evtx > Security.xml
+pretty-xml.py Security.xml
+```
