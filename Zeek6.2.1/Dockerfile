@@ -8,6 +8,7 @@ RUN apt-get update -q && apt-get upgrade -y \
 	&& wget https://www.zeek.org/downloads/bro-2.6.1.tar.gz --no-check-certificate \
 	&& tar -xzf bro-2.6.1.tar.gz
 
+# yes, this could be combined with the above, but breaking it into two sections is better for one's sanity if either fails
 RUN cd bro-2.6.1 \
 	&& ./configure \
 	&& make \
