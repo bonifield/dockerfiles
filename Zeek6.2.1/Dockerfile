@@ -9,8 +9,9 @@ RUN apt-get update -q && apt-get upgrade -y \
 	&& tar -xzf bro-2.6.1.tar.gz
 
 # yes, this could be combined with the above, but breaking it into two sections is better for one's sanity if either fails
-RUN cd bro-2.6.1 \
-	&& ./configure \
+WORKDIR /root/bro/bro-2.6.1
+
+RUN ./configure \
 	&& make \
 	&& make install
 
