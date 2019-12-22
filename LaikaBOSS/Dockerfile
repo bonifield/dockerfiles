@@ -42,6 +42,7 @@ WORKDIR $WORKY
 RUN wget https://github.com/erocarrera/pefile/archive/pefile-1.2.10-139.tar.gz
 RUN tar vxzf pefile-1.2.10-139.tar.gz
 WORKDIR $WORKY/pefile-pefile-1.2.10-139
+# the setup file chokes on the value of version
 RUN sed -i "s/\__version__.*$/\__version__ = '12345'/g" pefile.py
 RUN python setup.py build
 RUN python setup.py install
@@ -87,10 +88,11 @@ ENTRYPOINT ["/usr/local/bin/laika.py"]
 # docker run --rm -v ~:/lb laikaboss [your-file-to-analyze]
 # docker run --rm -v ~:/lb laikaboss [your-file-to-analyze] | jq -C . | less -r
 
+#################################################
+
 # comment out ENTRYPOINT then uncomment below to make interactive with docker exec for testing and poking around (remember to not use --rm if intending to save the container after testing)
 # COPY sleepy.sh /usr/bin/
 # CMD ["/bin/bash", "/usr/bin/sleepy.sh"]
-
 
 # for manual testing with sleepy running to keep the container alive
 # docker run --rm -v $PWD:/lb -d laikaboss && docker exec -it `docker ps | grep laikaboss | cut -d ' ' -f 1` /bin/bash && docker stop `docker ps | grep laikaboss | cut -d ' ' -f 1`
