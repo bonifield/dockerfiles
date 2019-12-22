@@ -8,14 +8,17 @@
 docker build -t laikaboss .
 ```
 
-### alias the container
+### alias the container in .dockerfunc
 - with -v, left of the colon is your LOCAL host, right is the working path INSIDE the container
-- adding the source statement to the alias forces the alias to re-evaluate $PWD (though you may need to run the command a second time if it errors out the first time after changing directories)
+- add the following to your home location's .dockerfunc (or create new if it does not exist)
 ```
-# vim/nano ~/.bashrc
-alias laikaboss="source ~/.bashrc && docker run --rm -v $PWD:/lb laikaboss"
-# save and exit
-. .bashrc
+#!/bin/bash
+laikaboss(){
+	docker run --rm -v $PWD:/lb laikaboss "$@"
+}
+
+# save and exit, then run
+# . .dockerfunc
 ```
 
 ### use Laika BOSS to parse and analyze files
@@ -23,7 +26,7 @@ alias laikaboss="source ~/.bashrc && docker run --rm -v $PWD:/lb laikaboss"
 # run the container directly
 docker run --rm -v `pwd`:/lb laikaboss YOURFILEGOESHERE.zip | jq -C . | less -r
 
-# run via alias
+# run via function name (alias)
 laikaboss YOURFILEGOESHERE | jq -C . | less -r
 ```
 
